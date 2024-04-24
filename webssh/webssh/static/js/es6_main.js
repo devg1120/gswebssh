@@ -764,7 +764,7 @@ function connect_with_options(data) {
     }
 
     status.text('');
-    button.prop('disabled', true);
+    button.disabled = true;
     fetch(url, {
             method: 'POST',
             body: data
