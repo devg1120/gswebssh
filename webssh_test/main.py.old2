@@ -9,7 +9,6 @@ from pathlib import Path
 import sys
 import os
 import signal
-import time
 import asyncio
 sys.path.append(os.path.join(os.path.dirname(__file__), "../webssh"))
 ##########################################################
@@ -52,7 +51,12 @@ def app_listen(app, port, address, server_settings):
 
 
 async def shutdown():
-    print("shutdown...")
+    #logging.info('Change status for maintenance.')
+    #logging.info('Wait to complete requests.')
+    #await asyncio.sleep(1)
+    # リソースの解放などの終了処理を実行する
+    #logging.info('Release resources.')
+
     tornado.ioloop.IOLoop.current().stop()
 
 
@@ -61,9 +65,11 @@ def shutdown_handler(sig, frame):
     tornado.ioloop.IOLoop.instance().add_callback_from_signal(shutdown)
 
 
-def main_org():
-    signal.signal(signal.SIGTERM, shutdown_handler)
-    signal.signal(signal.SIGINT, shutdown_handler)
+def main():
+
+
+    #signal.signal(signal.SIGTERM, shutdown_handler)
+    #signal.signal(signal.SIGINT, shutdown_handler)
 
     options.parse_command_line()
     check_encoding_setting(options.encoding)
@@ -80,83 +86,11 @@ def main_org():
         print("Loop start...")
         loop.start()
         print("Loop end")
-    except Exception :
+    #except KeyboardInterrupt:
+    except KeyboardInterrupt as e:
         print("Shutting down gracefully..." , flush=True)
     finally:
         loop.stop()
-
-
-import threading
-import ctypes
-
-def start_tornado(*args, **kwargs):
-    options.parse_command_line()
-    check_encoding_setting(options.encoding)
-    loop = tornado.ioloop.IOLoop.current()
-    app = make_app(make_handlers(loop, options), get_app_settings(options))
-    ssl_ctx = get_ssl_context(options)
-    server_settings = get_server_settings(options)
-    app_listen(app, options.port, options.address, server_settings)
-    if ssl_ctx:
-        server_settings.update(ssl_options=ssl_ctx)
-        app_listen(app, options.sslport, options.ssladdress, server_settings)
-    loop.start()
-    #try:
-    #    print("Loop start...")
-    #    loop.start()
-    #    print("Loop end")
-    #except Exception :
-    #    print("Shutting down gracefully..." , flush=True)
-    #finally:
-    #    loop.stop()
-
-class twe(threading.Thread):
-    def __init__(self, group=None, target=None, name=None, args=(), kwargs={}):
-        threading.Thread.__init__(self, group=group, target=target, name=name)
-        self.args = args
-        self.kwargs = kwargs
-        return
-    
-    def run(self):
-        self._target(*self.args, **self.kwargs)
-
-    def get_id(self):
-        if hasattr(self, '_thread_id'):
-            return self._thread_id
-        for id, thread in threading._active.items():
-            if thread is self:
-                return id
-    
-    def raise_exception(self):
-        print("raise_exception")
-        ioloop = tornado.ioloop.IOLoop.instance()
-        ioloop.add_callback(ioloop.stop)
-        thread_id = self.get_id()
-        resu = ctypes.pythonapi.PyThreadState_SetAsyncExc(ctypes.c_long(thread_id), ctypes.py_object(SystemExit))
-        print("thread exit")
-        if resu > 1:
-            ctypes.pythonapi.PyThreadState_SetAsyncExc(ctypes.c_long(thread_id), 0)
-            print('Failure in raising exception')
-
-
-def main():
-
-    t = twe(target=start_tornado)  
-
-    try:
-        t.start()
-        #t.join()
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        print("except KeyboardInterrupt")
-        #ioloop = tornado.ioloop.IOLoop.instance()
-        #ioloop.add_callback(ioloop.stop)
-        t.raise_exception()
-        print("stopping")
-        t.join()
-
-
 
 
 if __name__ == '__main__':
