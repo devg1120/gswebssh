@@ -1,0 +1,17 @@
+{
+  "name": "golden-layout-vite",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host --port=3000",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "golden-layout": "^2.6.0"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0"
+  }
+}
