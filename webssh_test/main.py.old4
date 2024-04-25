@@ -147,9 +147,11 @@ def main():
         t.start()
         #t.join()
         while True:
-            time.sleep(3)
+            time.sleep(1)
     except KeyboardInterrupt:
         print("except KeyboardInterrupt")
+        #ioloop = tornado.ioloop.IOLoop.instance()
+        #ioloop.add_callback(ioloop.stop)
         t.raise_exception()
         print("stopping")
         t.join()
