@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+      <section id="bodySection">
+            <section id="controls">
+<div class="tabs is-small">
+  <ul>
+    <li class="is-active"><a>Pictures</a></li>
+    <li><a>Music</a></li>
+    <li><a>Videos</a></li>
+    <li><a>Documents</a></li>
+  </ul>
+</div>
+                <section id="registerSection">
+                    <section id="registerNotVirtualSection">
+                        <button id="registerNotVirtualButton" class="button is-dark control" >Register Component Types</button>
+                        <section id="registerNotVirtualRadioSection" class="radioLine">
+                            <section class="labelledRadio">
+                                <input id="registerNotVirtualAllRadio" class="control" type="radio" name="registerNotVirtualRadio">
+                                <label for="registerNotVirtualAllRadio">All</label>
+                            </section>
+                            <section class="labelledRadio">
+                                <input id="registerNotVirtualColorEventRadio" class="control" type="radio" name="registerNotVirtualRadio" checked>
+                                <label for="registerVirtualColorEventRadio">Color, Event</label>
+                            </section>
+                        </section>
+                    </section>
+                    <section id="registerVirtualSection">
+                        <button id="registerVirtualButton" class="button is-dark control">Register Component Types As Virtual</button>
+                        <section id="registerVirtualRadioSection" class="radioLine">
+                            <section class="labelledRadio">
+                                <input id="registerVirtualAllRadio" type="radio" name="registerVirtualRadio">
+                                <label for="registerVirtualAllRadio">All</label>
+                            </section>
+                            <section class="labelledRadio">
+                                <input id="registerVirtualTextBooleanRadio" type="radio" name="registerVirtualRadio" checked>
+                                <label for="registerVirtualTextBooleanRadio">Text, Boolean</label>
+                            </section>
+                        </section>
+                    </section>
+                </section>
+                <section id="eventBindingSection">
+                    <span id="eventBindingSpan" title="Layout will be cleared">Event Binding:</span>
+                    <section id="eventBindingRadios" class="radioLine">
+                        <section class="labelledRadio">
+                            <input id="eventBindingVirtualRadio" class="control" type="radio" name="eventBindingRadio" title="Layout will be cleared">
+                            <label for="eventBindingVirtualRadio">Virtual</label>
+                        </section>
+                        <section class="labelledRadio">
+                            <input id="eventBindingEmbeddedRadio" class="control" type="radio" name="eventBindingRadio" title="Layout will be cleared">
+                            <label for="eventBindingEmbeddedRadio">Embedded</label>
+                        </section>
+                    </section>
+                </section>
+                <section id="clearSection">
+                    <button id="clearButton" class="button is-dark control">Clear</button>
+                </section>
+                <section id="predefinedLayoutsSection">
+                    <div class="select">
+                         <select id="layoutSelect" class="control"></select>
+		    </div>
+                    <button id="loadLayoutButton" class="button is-dark control">Load Layout</button>
+                </section>
+                <section id="saveAndReloadLayoutSection">
+                    <button id="saveLayoutButton" class="button is-dark control">Save Layout</button>
+                    <button id="reloadSavedLayoutButton" class="button is-dark control">Reload saved Layout</button>
+                </section>
+                <section id="addComponentSection">
+                    <div class="select">
+                      <select id="registeredComponentTypesForAddSelect" class="control"></select>
+		    </div>
+                    <button id="addComponentByDragButton" class="button is-dark control">D</button>
+                    <button id="addComponentButton" class="button is-dark control">Add Component</button>
+                </section>
+                <section id="rootComponentSection">
+                    <button id="loadComponentAsRootButton" class="button is-dark control">Load Component as Root</button>
+                </section>
+                <section id="replaceComponentSection">
+                    <div class="select">
+                      <select id="registeredComponentTypesForReplaceSelect" class="control"></select>
+		    </div>
+                    <button id="replaceComponentButton" class="button is-dark control">Replace Color Component with</button>
+                </section>
+		<div class="panel ">
+		    <section class="panel-heading">HEAD</section>
+                    <section id="lastVirtualRectingCountSection" class="panel-block">
+                        <span>Last virtual recting count</span>
+                        <span id="lastVirtualRectingCountSpan"></span>
+                    </section>
+                    <section id="clickCount" class="panel-block">
+                        <span>Click count: Capture: </span>
+                        <span id="captureClickCountSpan"></span>
+                        <span> Bubble: </span>
+                        <span id="bubbleClickCountSpan"></span>
+                    </section>
+                    <section id="stackHeaderClick" class="panel-block">
+                        <span>Stack Header: </span>
+                        <div id="stackHeaderClickedDiv">
+                            <span>Clicked: </span>
+                            <span id="stackHeaderClickedItemCountSpan"></span>
+                        </div>
+                    </section>
+		</div>
+            </section>
+            <section id="layoutContainer">
+            </section>
+        </section>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
